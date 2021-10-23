@@ -1,15 +1,9 @@
 import React from 'react'
 import { Flex, Box, Button, Input, Table, Thead, Th, Tr, Tbody, Td, useToast, HStack, BoxProps } from '@chakra-ui/react'
 
-import { advanceDaily } from '../rng/LCG/lcg'
-import {
-  generateLotteryNumber,
-  generateOutbreak,
-  generateTileIndexes,
-  dpOutbreaks,
-  ptOutbreaks,
-} from '../rng/gen4/daily'
-import { MtCoronetB1F } from './MtCoronetB1F'
+import { advanceDaily } from '../../rng/LCG/lcg'
+import { generateLotteryNumber, generateOutbreak, generateTileIndexes, dpOutbreaks, ptOutbreaks } from './util'
+import { MtCoronetB1F } from './MtCoronetB1FMap'
 
 const toHex = (v: number) => (v >>> 0).toString(16)
 const validate = (input: string) => {

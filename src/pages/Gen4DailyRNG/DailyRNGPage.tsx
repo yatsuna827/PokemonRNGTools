@@ -3,13 +3,11 @@ import { Flex, Box, Button, HStack } from '@chakra-ui/react'
 
 import { DailySeedFinder } from './DailySeedFinder'
 import { DailyRNGList } from './DailyRNGList'
-import { MtCoronetB1F } from './MtCoronetB1F'
 
 export const DailyRNGPage: React.FC = () => {
-  const [tab, setTab] = React.useState<'DailySeedFinder' | 'DailySeedList' | 'sandbox'>('DailySeedFinder')
+  const [tab, setTab] = React.useState<'DailySeedFinder' | 'DailySeedList'>('DailySeedFinder')
   const handleSetFinderTab = React.useCallback(() => setTab('DailySeedFinder'), [])
   const handleSetListTab = React.useCallback(() => setTab('DailySeedList'), [])
-  // const handleSetSandBox = React.useCallback(() => setTab("sandbox"), [])
 
   return (
     <Box marginX="150px" marginBottom="50px">
@@ -39,7 +37,6 @@ export const DailyRNGPage: React.FC = () => {
       </Flex>
       {tab === 'DailySeedFinder' && <DailySeedFinder />}
       {tab === 'DailySeedList' && <DailyRNGList />}
-      {tab === 'sandbox' && <MtCoronetB1F />}
     </Box>
   )
 }
