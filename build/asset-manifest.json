@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.js": "./static/js/main.9798d454.chunk.js",
-    "main.js.map": "./static/js/main.9798d454.chunk.js.map",
-    "runtime-main.js": "./static/js/runtime-main.13c5c820.js",
-    "runtime-main.js.map": "./static/js/runtime-main.13c5c820.js.map",
-    "static/js/2.072acae1.chunk.js": "./static/js/2.072acae1.chunk.js",
-    "static/js/2.072acae1.chunk.js.map": "./static/js/2.072acae1.chunk.js.map",
-    "index.html": "./index.html",
-    "static/js/2.072acae1.chunk.js.LICENSE.txt": "./static/js/2.072acae1.chunk.js.LICENSE.txt"
+    "main.js": "/PokemonRNGTools/static/js/main.08deb1d0.chunk.js",
+    "main.js.map": "/PokemonRNGTools/static/js/main.08deb1d0.chunk.js.map",
+    "runtime-main.js": "/PokemonRNGTools/static/js/runtime-main.a72bb361.js",
+    "runtime-main.js.map": "/PokemonRNGTools/static/js/runtime-main.a72bb361.js.map",
+    "static/js/2.405577ac.chunk.js": "/PokemonRNGTools/static/js/2.405577ac.chunk.js",
+    "static/js/2.405577ac.chunk.js.map": "/PokemonRNGTools/static/js/2.405577ac.chunk.js.map",
+    "index.html": "/PokemonRNGTools/index.html",
+    "static/js/2.405577ac.chunk.js.LICENSE.txt": "/PokemonRNGTools/static/js/2.405577ac.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.13c5c820.js",
-    "static/js/2.072acae1.chunk.js",
-    "static/js/main.9798d454.chunk.js"
+    "static/js/runtime-main.a72bb361.js",
+    "static/js/2.405577ac.chunk.js",
+    "static/js/main.08deb1d0.chunk.js"
   ]
 }
