@@ -1,4 +1,4 @@
-import { lcg_next } from './lcg'
+import { lcg_next } from '@src/rng/LCG/lcg'
 
 const g_inv = (x: number) => lcg_next(x, 0xeeb9eb65, 0xfc77a683)
 const h = (x: number) => lcg_next(x, 0x6c078965, 0xca55f729)

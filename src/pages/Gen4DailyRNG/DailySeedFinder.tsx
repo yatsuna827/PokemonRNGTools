@@ -1,10 +1,9 @@
 import React from 'react'
 import { Flex, Box, Button, Input, Table, Thead, Th, Tr, Tbody, Td, useToast } from '@chakra-ui/react'
 
-import { findDailySeed } from '../rng/LCG/findDailySeed'
-import { advanceDaily } from '../rng/LCG/lcg'
-import { generateLotteryNumber } from '../rng/gen4/daily'
-import { useIntegerInput } from '../hooks/useIntegerInput'
+import { generateLotteryNumber, findDailySeed } from './util'
+import { advanceDaily } from '@src/rng/LCG/lcg'
+import { useIntegerInput } from '@src/hooks/useIntegerInput'
 
 const toHex = (v: number) => (v >>> 0).toString(16)
 const validate = (n: number) => {
