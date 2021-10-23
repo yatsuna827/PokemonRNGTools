@@ -8,8 +8,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint --ext .jsx,.js,.tsx,.ts src/",
-    "deploy": "gh-pages -d build"
+    "lint": "eslint --ext .jsx,.js,.tsx,.ts src/"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.6.10",
