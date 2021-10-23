@@ -18,5 +18,8 @@
         "**/node_modules/*/**": true,
         "**/.hg/store/**": true
     },
-    "eslint.nodePath": "./node_modules"
+    "eslint.nodePath": "./node_modules",
+    "path-autocomplete.pathMappings": {
+        "@": "${folder}/src"
+    }
 }
