@@ -1,12 +1,11 @@
 import React from 'react'
-import { Flex, Box, Button, Input, Table, Thead, Th, Tr, Tbody, Td, useToast, HStack } from '@chakra-ui/react'
+import { Flex, Box, Button, Input, Table, Thead, Th, Tr, Tbody, Td, useToast, HStack, BoxProps } from '@chakra-ui/react'
 
 import { advanceDaily } from '../rng/LCG/lcg'
 import {
   generateLotteryNumber,
   generateOutbreak,
   generateTileIndexes,
-  indexToPoint,
   dpOutbreaks,
   ptOutbreaks,
 } from '../rng/gen4/daily'
@@ -22,18 +21,26 @@ type DailyResult = {
   lottery: number
   mapName: string
   pokemon: string
-  points: [number, number][]
+  points: readonly number[]
 }
 
-const ResultTableRow: React.FC<DailyResult & { i: number }> = ({ i, seed, lottery, mapName, pokemon }) => (
-  <Tr>
-    <Td userSelect="none">{i + 1}日目</Td>
-    <Td>{seed}</Td>
-    <Td>{lottery}</Td>
-    <Td>{mapName}</Td>
-    <Td>{pokemon}</Td>
-  </Tr>
-)
+const ResultTableRow: React.FC<
+  DailyResult & { i: number; onClick: (i: number, points: readonly number[]) => void } & Pick<BoxProps, 'bg'>
+> = ({ i, bg, seed, lottery, mapName, pokemon, points, onClick }) => {
+  const handleClick = React.useCallback(() => {
+    onClick(i, points)
+  }, [onClick, points])
+
+  return (
+    <Tr cursor="pointer" onClick={handleClick} bg={bg}>
+      <Td userSelect="none">{i + 1}日目</Td>
+      <Td>{seed}</Td>
+      <Td>{lottery}</Td>
+      <Td>{mapName}</Td>
+      <Td>{pokemon}</Td>
+    </Tr>
+  )
+}
 
 export const DailyRNGList: React.FC = () => {
   const toast = useToast()
@@ -41,6 +48,9 @@ export const DailyRNGList: React.FC = () => {
   const inputEl = React.useRef<HTMLInputElement>(null)
   const [result, setResult] = React.useState<readonly DailyResult[] | undefined>(undefined)
   const [version, setVersion] = React.useState<'dp' | 'pt'>('dp')
+  const [selectedRow, setSelectedRow] = React.useState<number | undefined>(undefined)
+  const [selectedPoints, setSelectedPoints] = React.useState<readonly number[]>([])
+
   const handleSetDp = React.useCallback(() => setVersion('dp'), [])
   const handleSetPt = React.useCallback(() => setVersion('pt'), [])
   const handleCalc = React.useCallback(() => {
@@ -64,11 +74,17 @@ export const DailyRNGList: React.FC = () => {
         seed: toHex(seed),
         lottery: generateLotteryNumber(seed >>> 0),
         ...generateOutbreak(seed >>> 0, version === 'dp' ? dpOutbreaks : ptOutbreaks),
-        points: generateTileIndexes(seed >>> 0).map(indexToPoint),
+        points: generateTileIndexes(seed >>> 0),
       })
     }
     setResult(res)
+    setSelectedRow(undefined)
+    setSelectedPoints([])
   }, [inputEl, toast, version])
+  const handleClickResult = React.useCallback((i: number, points: readonly number[]) => {
+    setSelectedRow(i)
+    setSelectedPoints(points)
+  }, [])
 
   return (
     <Box>
@@ -108,11 +124,22 @@ export const DailyRNGList: React.FC = () => {
                 <Th>大量発生ポケモン</Th>
               </Tr>
             </Thead>
-            <Tbody>{result && result.map((val, i) => <ResultTableRow key={val.seed} i={i} {...result[i]} />)}</Tbody>
+            <Tbody>
+              {result &&
+                result.map((val, i) => (
+                  <ResultTableRow
+                    key={val.seed}
+                    i={i}
+                    onClick={handleClickResult}
+                    {...result[i]}
+                    bg={i === selectedRow ? 'gray.200' : 'transparent'}
+                  />
+                ))}
+            </Tbody>
           </Table>
         </Box>
         <Box w="40%">
-          <MtCoronetB1F />
+          <MtCoronetB1F feebasIndexes={selectedPoints} />
         </Box>
       </Flex>
     </Box>
