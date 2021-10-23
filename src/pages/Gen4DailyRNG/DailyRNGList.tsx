@@ -1,5 +1,20 @@
 import React from 'react'
-import { Flex, Box, Button, Input, Table, Thead, Th, Tr, Tbody, Td, useToast, HStack, BoxProps } from '@chakra-ui/react'
+import {
+  Flex,
+  Box,
+  Button,
+  Input,
+  Table,
+  Thead,
+  Th,
+  Tr,
+  Tbody,
+  Td,
+  useToast,
+  HStack,
+  BoxProps,
+  ButtonProps,
+} from '@chakra-ui/react'
 
 import { advanceDaily } from '../../rng/LCG/lcg'
 import { generateLotteryNumber, generateOutbreak, generateTileIndexes, dpOutbreaks, ptOutbreaks } from './util'
@@ -16,6 +31,33 @@ type DailyResult = {
   mapName: string
   pokemon: string
   points: readonly number[]
+}
+
+const StyledButton: React.FC<ButtonProps> = ({ children, ...props }) => {
+  return (
+    <Button variant="ghost" border="1px" borderColor="gray.300" rounded="sm" userSelect="none" {...props}>
+      {children}
+    </Button>
+  )
+}
+const SelectedBox: React.FC<BoxProps> = ({ children, ...props }) => {
+  return (
+    <Flex
+      h="40px"
+      w="100px"
+      fontWeight="bold"
+      border="1px"
+      color="white"
+      bg="gray.500"
+      rounded="sm"
+      justifyContent="center"
+      alignItems="center"
+      userSelect="none"
+      {...props}
+    >
+      {children}
+    </Flex>
+  )
 }
 
 const ResultTableRow: React.FC<
@@ -88,24 +130,24 @@ export const DailyRNGList: React.FC = () => {
         <Input ref={inputEl} rounded="sm" w="150px" defaultValue="8fe39a4b" />
       </Flex>
       <HStack marginBottom="10px">
-        <Button variant="link" onClick={handleSetDp}>
-          ダイパ
-        </Button>
-        <Button variant="link" onClick={handleSetPt}>
-          プラチナ
-        </Button>
+        {version === 'dp' ? (
+          <SelectedBox>ダイパ</SelectedBox>
+        ) : (
+          <StyledButton w="100px" onClick={handleSetDp}>
+            ダイパ
+          </StyledButton>
+        )}
+        {version === 'pt' ? (
+          <SelectedBox>プラチナ</SelectedBox>
+        ) : (
+          <StyledButton w="100px" onClick={handleSetPt}>
+            プラチナ
+          </StyledButton>
+        )}
       </HStack>
-      <Button
-        marginBottom="10px"
-        variant="ghost"
-        w="150px"
-        border="1px"
-        borderColor="gray.300"
-        rounded="sm"
-        onClick={handleCalc}
-      >
+      <StyledButton marginBottom="10px" w="150px" onClick={handleCalc}>
         計算
-      </Button>
+      </StyledButton>
       <Flex W="100vw">
         <Box w="60%" paddingX="10px">
           <Table size="sm">
