@@ -1,36 +1,16 @@
 import React from 'react'
-import {
-  Flex,
-  Box,
-  Button,
-  Input,
-  Table,
-  Thead,
-  Th,
-  Tr,
-  Tbody,
-  Td,
-  useToast,
-  HStack,
-  BoxProps,
-  ButtonProps,
-} from '@chakra-ui/react'
+import { Flex, Box, Button, Input, useToast, HStack, BoxProps, ButtonProps } from '@chakra-ui/react'
 
-import { advanceDaily } from '../../rng/LCG/lcg'
-import { generateLotteryNumber, generateOutbreak, generateTileIndexes, dpOutbreaks, ptOutbreaks } from './util'
+import type { DailyResult } from './define'
+import { ResultTable } from './DailyRNGList'
+
+import { advanceDaily } from '@src/rng/LCG/lcg'
+import { generateLotteryNumber, generateOutbreak, generateTileIndexes, dpOutbreaks, ptOutbreaks } from '../util'
 import { MtCoronetB1F } from './MtCoronetB1FMap'
 
 const toHex = (v: number) => (v >>> 0).toString(16)
 const validate = (input: string) => {
   return 0 < input.length && input.length <= 8 && !/[^0-9A-Fa-f]/g.test(input)
-}
-
-type DailyResult = {
-  seed: string
-  lottery: number
-  mapName: string
-  pokemon: string
-  points: readonly number[]
 }
 
 const StyledButton: React.FC<ButtonProps> = ({ children, ...props }) => {
@@ -60,25 +40,7 @@ const SelectedBox: React.FC<BoxProps> = ({ children, ...props }) => {
   )
 }
 
-const ResultTableRow: React.FC<
-  DailyResult & { i: number; onClick: (i: number, points: readonly number[]) => void } & Pick<BoxProps, 'bg'>
-> = ({ i, bg, seed, lottery, mapName, pokemon, points, onClick }) => {
-  const handleClick = React.useCallback(() => {
-    onClick(i, points)
-  }, [onClick, points])
-
-  return (
-    <Tr cursor="pointer" onClick={handleClick} bg={bg}>
-      <Td userSelect="none">{i + 1}日目</Td>
-      <Td>{seed}</Td>
-      <Td>{lottery}</Td>
-      <Td>{mapName}</Td>
-      <Td>{pokemon}</Td>
-    </Tr>
-  )
-}
-
-export const DailyRNGList: React.FC = () => {
+export const DailyRNGListPage: React.FC = () => {
   const toast = useToast()
 
   const inputEl = React.useRef<HTMLInputElement>(null)
@@ -148,31 +110,9 @@ export const DailyRNGList: React.FC = () => {
       <StyledButton marginBottom="10px" w="150px" onClick={handleCalc}>
         計算
       </StyledButton>
-      <Flex W="100vw">
+      <Flex>
         <Box w="60%" paddingX="10px">
-          <Table size="sm">
-            <Thead>
-              <Tr>
-                <Th></Th>
-                <Th>seed</Th>
-                <Th>くじ番号</Th>
-                <Th>大量発生マップ</Th>
-                <Th>大量発生ポケモン</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {result &&
-                result.map((val, i) => (
-                  <ResultTableRow
-                    key={val.seed}
-                    i={i}
-                    onClick={handleClickResult}
-                    {...result[i]}
-                    bg={i === selectedRow ? 'gray.200' : 'transparent'}
-                  />
-                ))}
-            </Tbody>
-          </Table>
+          <ResultTable result={result} selectedRowIndex={selectedRow} onClickRow={handleClickResult} />
         </Box>
         <Box w="40%">
           <MtCoronetB1F feebasIndexes={selectedPoints} />
