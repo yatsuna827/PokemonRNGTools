@@ -10,7 +10,7 @@ export const DailyRNGPage: React.FC = () => {
   const handleSetListTab = React.useCallback(() => setTab('DailySeedList'), [])
 
   return (
-    <Box marginX="150px" marginBottom="50px">
+    <Box maxW="1000px" margin="0 auto" marginBottom="50px">
       <Flex
         h="80px"
         w="100%"
