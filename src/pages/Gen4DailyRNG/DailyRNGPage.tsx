@@ -2,7 +2,7 @@ import React from 'react'
 import { Flex, Box, Button, HStack } from '@chakra-ui/react'
 
 import { DailySeedFinder } from './DailySeedFinder'
-import { DailyRNGList } from './DailyRNGList'
+import { DailyRNGListPage } from './DailyRNGList'
 
 export const DailyRNGPage: React.FC = () => {
   const [tab, setTab] = React.useState<'DailySeedFinder' | 'DailySeedList'>('DailySeedFinder')
@@ -10,7 +10,7 @@ export const DailyRNGPage: React.FC = () => {
   const handleSetListTab = React.useCallback(() => setTab('DailySeedList'), [])
 
   return (
-    <Box marginX="150px" marginBottom="50px">
+    <Box maxW="1000px" margin="0 auto" marginBottom="50px">
       <Flex
         h="80px"
         w="100%"
@@ -36,7 +36,7 @@ export const DailyRNGPage: React.FC = () => {
         </HStack>
       </Flex>
       {tab === 'DailySeedFinder' && <DailySeedFinder />}
-      {tab === 'DailySeedList' && <DailyRNGList />}
+      {tab === 'DailySeedList' && <DailyRNGListPage />}
     </Box>
   )
 }
