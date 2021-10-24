@@ -1,0 +1,1 @@
+export { DailyRNGListPage } from './Page'

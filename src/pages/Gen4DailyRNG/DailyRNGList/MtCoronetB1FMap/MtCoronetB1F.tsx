@@ -20,7 +20,7 @@ const TileRow: React.FC<{
 
 export const MtCoronetB1F: React.FC<{
   feebasIndexes?: readonly number[]
-}> = ({ feebasIndexes }) => {
+}> = React.memo(({ feebasIndexes }) => {
   return (
     <>
       {coronetB1FMap.map((it, i) => (
@@ -28,4 +28,4 @@ export const MtCoronetB1F: React.FC<{
       ))}
     </>
   )
-}
+})
