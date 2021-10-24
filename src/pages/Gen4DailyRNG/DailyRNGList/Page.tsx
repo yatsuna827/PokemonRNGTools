@@ -110,11 +110,11 @@ export const DailyRNGListPage: React.FC = () => {
       <StyledButton marginBottom="10px" w="150px" onClick={handleCalc}>
         計算
       </StyledButton>
-      <Flex>
+      <Flex flexWrap="wrap">
         <Box w="60%" paddingX="10px">
           <ResultTable result={result} selectedRowIndex={selectedRow} onClickRow={handleClickResult} />
         </Box>
-        <Box w="40%">
+        <Box>
           <MtCoronetB1F feebasIndexes={selectedPoints} />
         </Box>
       </Flex>
