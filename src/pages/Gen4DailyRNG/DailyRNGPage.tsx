@@ -11,20 +11,6 @@ export const DailyRNGPage: React.FC = () => {
 
   return (
     <Box maxW="1000px" margin="0 auto" marginBottom="50px">
-      <Flex
-        h="80px"
-        w="100%"
-        paddingLeft="30px"
-        justifyContent="center"
-        alignItems="center"
-        bg="#29BEEF"
-        marginBottom="30px"
-      >
-        <Box fontSize="24px" color="white">
-          Pokemon RNG Tools
-        </Box>
-      </Flex>
-
       <Flex justifyContent="left" marginBottom="30px">
         <HStack>
           <Button variant="link" onClick={handleSetFinderTab}>
