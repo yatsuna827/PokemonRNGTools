@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, Box, Button, Input, useToast, HStack, BoxProps, ButtonProps } from '@chakra-ui/react'
+import { Flex, Box, Input, useToast, HStack, BoxProps } from '@chakra-ui/react'
 
 import type { DailyResult } from './define'
 import { ResultTable } from './DailyRNGList'
@@ -8,14 +8,8 @@ import { toHex, validateSeed } from '@src/util'
 import { advanceDaily } from '@src/rng/LCG/lcg'
 import { generateLotteryNumber, generateOutbreak, generateTileIndexes, dpOutbreaks, ptOutbreaks } from '../util'
 import { MtCoronetB1F } from './MtCoronetB1FMap'
+import { StyledButton } from '@src/components/StyledButton'
 
-const StyledButton: React.FC<ButtonProps> = ({ children, ...props }) => {
-  return (
-    <Button variant="ghost" border="1px" borderColor="gray.300" rounded="sm" userSelect="none" {...props}>
-      {children}
-    </Button>
-  )
-}
 const SelectedBox: React.FC<BoxProps> = ({ children, ...props }) => {
   return (
     <Flex
