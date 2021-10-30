@@ -15,13 +15,13 @@ const get3rdLottery = (seed: number) => generateLotteryNumber(advanceDaily(advan
 
 export const DailySeedFinder: React.FC = () => {
   const toast = useToast()
-  const { value: value1, ...prop1 } = useIntegerInput('65005')
-  const { value: value2, ...prop2 } = useIntegerInput('14314')
+  const { getValue: getValue1, ...prop1 } = useIntegerInput('65005')
+  const { getValue: getValue2, ...prop2 } = useIntegerInput('14314')
   const [result, setResult] = React.useState<number[]>([])
   const handleCalc = React.useCallback(() => {
-    const v1 = Number(value1)
-    const v2 = Number(value2)
-    if (value1 === '' || value2 === '' || !validate(v1) || !validate(v2)) {
+    const v1 = getValue1()
+    const v2 = getValue2()
+    if (!validate(v1) || !validate(v2)) {
       toast({
         description: 'あほしね',
         status: 'error',
@@ -30,18 +30,18 @@ export const DailySeedFinder: React.FC = () => {
     } else {
       setResult(findDailySeed(v1, v2))
     }
-  }, [value1, value2, toast])
+  }, [getValue1, getValue2, toast])
 
   return (
     <Box>
       <Box marginBottom="30px">日替わりseed検索</Box>
       <Flex alignItems="center" marginBottom="10px">
         <Box marginRight="10px">1日目</Box>
-        <Input rounded="sm" w="150px" value={value1} {...prop1} />
+        <Input rounded="sm" w="150px" {...prop1} />
       </Flex>
       <Flex alignItems="center" marginBottom="30px">
         <Box marginRight="10px">2日目</Box>
-        <Input rounded="sm" w="150px" value={value2} {...prop2} />
+        <Input rounded="sm" w="150px" {...prop2} />
       </Flex>
       <Button
         marginBottom="10px"

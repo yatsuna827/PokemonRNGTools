@@ -7,8 +7,9 @@ const filterInput = (value: string): string => {
   return ret === '0' ? ret : ret.replace(/^0+/, '')
 }
 
-type useIntegerInputReturn = Pick<InputProps, 'onChange' | 'onCompositionStart' | 'onCompositionEnd'> & {
+type useIntegerInputReturn = Pick<InputProps, 'onChange' | 'onBlur' | 'onCompositionStart' | 'onCompositionEnd'> & {
   value: string
+  getValue: () => number
 }
 export const useIntegerInput = (defaultValue: string): useIntegerInputReturn => {
   const [composing, setComposing] = React.useState<boolean>(false)
@@ -18,16 +19,22 @@ export const useIntegerInput = (defaultValue: string): useIntegerInputReturn => 
     (e: React.ChangeEvent<HTMLInputElement>) => setValue(composing ? e.target.value : filterInput(e.target.value)),
     [composing]
   )
+  const onBlur = React.useCallback(() => {
+    if (value === '') setValue('0')
+  }, [value])
   const onCompositionStart = React.useCallback(() => setComposing(true), [])
   const onCompositionEnd = React.useCallback(() => {
     setComposing(false)
     setValue(filterInput(value))
   }, [value])
+  const getValue = React.useCallback(() => parseInt(value), [value])
 
   return {
     value,
     onChange,
+    onBlur,
     onCompositionStart,
     onCompositionEnd,
+    getValue,
   }
 }
