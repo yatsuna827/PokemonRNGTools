@@ -2,6 +2,9 @@
 
 ポケモンの乱数調整用のツール置き場です。
 随時追加予定...。
+https://yatsuna827.github.io/PokemonRNGTools/
 
 ### Deploy
-`$ git subtree push --prefix build/ origin gh-pages`
+`$ git checkout deploy`
+`$ git merge main`
+`$ npm run deploy`
