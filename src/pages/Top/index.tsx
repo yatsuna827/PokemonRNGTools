@@ -7,10 +7,13 @@ export const Top: React.FC = () => {
       よおこそ
       <ul>
         <li>
-          <Link to="/daily">日替わり乱数</Link>
+          <Link to="/PokemonRNGTools/Gen4/daily">日替わり乱数</Link>
         </li>
         <li>
-          <Link to="/initial-seed">起動時刻計算</Link>
+          <Link to="/PokemonRNGTools/Gen4/initial-seed">起動時刻計算</Link>
+        </li>
+        <li>
+          <Link to="/PokemonRNGTools/Gen8/bdsp">BDSP</Link>
         </li>
       </ul>
     </>

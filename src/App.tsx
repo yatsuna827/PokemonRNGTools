@@ -7,6 +7,8 @@ import { CalcDateTimePage } from './pages/Gen4InitialSeed/CalcDateTimePage'
 import { Top } from './pages/Top'
 import { Header } from './components/Header'
 import { PageContainer } from './components/PageContainer'
+import { Gen8Top } from './pages/Gen8'
+import { BattleTower } from './pages/Gen8/BDSP/BattleTower'
 
 export const App: React.FC = () => {
   return (
@@ -15,11 +17,17 @@ export const App: React.FC = () => {
         <PageContainer>
           <Header />
           <Switch>
-            <Route path="/daily">
+            <Route path="/PokemonRNGTools/Gen4/daily">
               <DailyRNGPage />
             </Route>
-            <Route path="/initial-seed">
+            <Route path="/PokemonRNGTools/Gen4/initial-seed">
               <CalcDateTimePage />
+            </Route>
+            <Route path="/PokemonRNGTools/Gen8/bdsp/battle-tower">
+              <BattleTower />
+            </Route>
+            <Route path="/PokemonRNGTools/Gen8/bdsp">
+              <Gen8Top />
             </Route>
             <Route>
               <Top />
