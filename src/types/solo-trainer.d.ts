@@ -1,7 +1,6 @@
 declare module '*/bdsp_tower_trainers_single*' {
   type SoloTrainer = {
-    class: string
-    name: string
+    trainer: string
     teams: number[][]
   }
 
@@ -11,8 +10,7 @@ declare module '*/bdsp_tower_trainers_single*' {
 
 declare module '*/bdsp_tower_trainers_double_normal*' {
   type SoloTrainer = {
-    class: string
-    name: string
+    trainer: string
     teams: number[][]
   }
 
